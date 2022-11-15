@@ -176,3 +176,59 @@ Mongodb Practical 3: -
 Map – processes each document In the collection 
 Reduce- combines the output of map operation
 db.map_r.mapReduce(function() {emit(this.Name, this.Marks)}, function(key,value){return Array.avg(value)}, {out: 'MyOUTPUT'})
+
+
+###############   Trigger ###############################
+mysql> create database trigger;
+
+mysql> create database tejas;
+
+mysql> create database sanket;
+
+mysql> use database sanket;
+
+mysql> use sanket;
+
+mysql> create table library(student_id int,name varchar(50),book varchar(50),author varchar(50),status varchar(50));
+
+mysql> insert into library values(201,'Dipesh','dbms','sanket','available');
+
+mysql> insert into library values(202,'tejas','dsa','anket','not available');
+
+mysql> Select * from library;
+
+mysql> create table audit(name varchar(50),book varchar(50),status varchar(50));
+
+mysql> Select * from audit;
+
+mysql> delimiter $
+
+mysql> create trigger lib
+    -> after insert on library
+    -> for each row
+    -> begin
+    -> insert into audit values(new.name,new.book,new.status);
+    -> end;
+    -> $
+
+mysql> insert into library values(203,'jas','TOC','aniket','not available');
+    -> $
+
+
+mysql> Select * from library;
+    -> $
+
+mysql> Select * from audit;
+    -> $
+
+mysql> show triggers;
+    -> $
+
+mysql> drop trigger
+    -> $
+mysql> drop triggers;
+    -> $
+mysql> drop trigger lib;
+    -> $
+mysql> show triggers;
+    -> $
